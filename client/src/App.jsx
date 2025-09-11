@@ -1,14 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Navbar from './Components/Navbar'
 import './App.css'
-
+import { Route,Routes } from 'react-router'
+import Home from './Pages/Home'
+import About from './Pages/About'
+import Explore from './Pages/Explore'
+import ContactUs from './Pages/ContactUs'
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <div className="min-h-screen flex justify-center items-center" >
-      <h1 className="bg-red-600 font-bold">hello wordddd</h1>
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/home" element={<Home/>} />
+        <Route path="about" element={<About/>} />
+        <Route path="/explore" element={<Explore/>} />
+        <Route path="/contact-us" element={<ContactUs/>} />
+      </Routes>
     </div>
   )
 }
