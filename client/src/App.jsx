@@ -7,8 +7,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
-      <h1>hello world</h1>
+    <div className="min-h-screen flex justify-center items-center" >
+      <h1 className="bg-red-600 font-bold">hello wordddd</h1>
     </div>
   )
 }
