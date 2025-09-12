@@ -8,7 +8,7 @@ const ContactUs = () => {
         
         <p className='text-5xl text-red-500' >{counter}</p>
         <div className='text-4xl flex gap-3  ' >
-            <button onClick={()=>setCounter(counter+1)} className='cursor-pointer ' >+</button>
+            <button onClick={()=>setCounter((prev)=>prev+1)} className='cursor-pointer ' >+</button>
             <button onClick={()=>setCounter(counter-1)} className='cursor-pointer ' >-</button>
         </div>
 
