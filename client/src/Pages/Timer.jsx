@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 const POMODORO_DURATION=25*60;
-const BREAK_DURATION=5*60;
+const BREAK_DURATION=5;
 const Timer = () => {
   const [mode,setMode]=useState("work");
   const [timeLeft,setTimeLeft]=useState(POMODORO_DURATION);
   const [isRunning,setIsRunning]=useState(false);
-
+  const audioRef=useRef(null);
   useEffect(()=>{
     if(!isRunning) return;
     let id=setInterval(()=>{
@@ -13,6 +13,9 @@ const Timer = () => {
         if(prev<=1){
           const newMode=mode==="work"?("break"):("work");
           setMode(newMode);
+          if(audioRef.current){
+            audioRef.current.play();
+          }
           return newMode==="work"?POMODORO_DURATION:BREAK_DURATION;
         }
         return prev-1
@@ -49,6 +52,12 @@ const Timer = () => {
           </div>
           <button onClick={()=>{setMode(prev=>prev==="work"?("break"):("work"))}} className='mt-4 border-2 px-2 rounded-lg cursor-pointer hover:scale-105 active:scale-95' ><span className='font-bold text-pink-950' >Switch to</span> <span className='text-md' >{mode==="work"?"break":"work"}</span></button>
       </div>
+      <audio
+        ref={audioRef}
+        src="https://actions.google.com/sounds/v1/horror/aggressive_zombie_snarls.ogg"
+        preload="auto"
+      />
+
     </div>
   )
 }
