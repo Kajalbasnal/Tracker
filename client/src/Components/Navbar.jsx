@@ -20,8 +20,8 @@ const Navbar = () => {
         <NavLink to="/explore" className={linkClass}>
           🔍 Explore
         </NavLink>
-        <NavLink to="/contact-us" className={linkClass}>
-          📞 Contact
+        <NavLink to="/calculator" className={linkClass}>
+          🖩 Calculator
         </NavLink>
       </div>
     </nav>
