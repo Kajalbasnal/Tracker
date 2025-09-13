@@ -14,7 +14,13 @@ const Timer = () => {
           const newMode=mode==="work"?("break"):("work");
           setMode(newMode);
           if(audioRef.current){
+            audioRef.current.currentTime=0;
             audioRef.current.play();
+            setTimeout(()=>{
+              audioRef.current.pause();
+              audioRef.current.currentTime=0;
+            },3000)
+            
           }
           return newMode==="work"?POMODORO_DURATION:BREAK_DURATION;
         }
@@ -54,7 +60,7 @@ const Timer = () => {
       </div>
       <audio
         ref={audioRef}
-        src="https://actions.google.com/sounds/v1/horror/aggressive_zombie_snarls.ogg"
+        src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
         preload="auto"
       />
 
