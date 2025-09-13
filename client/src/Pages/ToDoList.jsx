@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 const ToDoList = () => {
   const [todo, setTodo] = useState("");
   const [desc, setDesc] = useState("");
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos"))||[]);
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
 
   const handleAdd = () => {
     if (todo.trim() === "" && desc.trim() === "") {
@@ -17,9 +19,10 @@ const ToDoList = () => {
     setTodo("");
     setDesc("");
   };
-  useEffect(()=>{
-    localStorage.setItem("todos",JSON.stringify(todos))
-  },[todos])
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleToggle = (idx) => {
     setTodos((todos) =>
@@ -34,34 +37,34 @@ const ToDoList = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 p-6">
-      <div className="bg-white shadow-2xl rounded-2xl p-6 w-full max-w-lg">
+    <div className="min-h-screen flex justify-center items-start bg-gradient-to-br from-orange-100 via-pink-100 to-red-100 p-8">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl">
         {/* Header */}
-        <h1 className="text-3xl font-bold text-center mb-6 text-purple-700">
-          ✨ To-Do List ✨
+        <h1 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
+          To-Do List
         </h1>
 
         {/* Input Section */}
-        <div className="flex flex-col gap-3 mb-4">
+        <div className="flex flex-col md:flex-row gap-3 mb-6">
           <input
             value={todo}
             onChange={(e) => setTodo(e.target.value)}
             type="text"
-            className="border-2 border-purple-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            placeholder="Enter your task..."
+            className="flex-1 border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm"
+            placeholder="Task title..."
           />
           <input
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             type="text"
-            className="border-2 border-purple-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            placeholder="Enter description..."
+            className="flex-1 border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 shadow-sm"
+            placeholder="Description..."
           />
           <button
             onClick={handleAdd}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg py-2 font-semibold shadow-md hover:scale-105 active:scale-95 transition-all"
+            className="bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full px-6 py-2 font-semibold shadow-md hover:scale-105 active:scale-95 transition-all"
           >
-            ➕ Add Task
+            ➕ Add
           </button>
         </div>
 
@@ -70,20 +73,20 @@ const ToDoList = () => {
           {todos.map((t, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between bg-purple-50 border border-purple-200 rounded-lg px-4 py-3 shadow-sm hover:shadow-md transition-all"
+              className="flex items-center justify-between bg-gradient-to-r from-pink-50 to-orange-50 border border-gray-200 rounded-xl px-5 py-3 shadow-sm hover:shadow-md transition-all"
             >
               <div
                 className="flex items-center gap-3 cursor-pointer"
                 onClick={() => handleToggle(idx)}
               >
                 {!t.completed ? (
-                  <span className="text-gray-400 text-xl">⭕</span>
+                  <span className="text-gray-400 text-2xl">○</span>
                 ) : (
-                  <span className="text-green-500 text-xl">✅</span>
+                  <span className="text-green-500 text-2xl">✔</span>
                 )}
                 <div
-                  className={`flex flex-col ${
-                    t.completed ? "line-through text-gray-500" : ""
+                  className={`flex flex-col transition-all ${
+                    t.completed ? "line-through text-gray-500" : "text-gray-800"
                   }`}
                 >
                   <span className="font-semibold text-lg">{t.title}</span>
@@ -94,14 +97,14 @@ const ToDoList = () => {
                 onClick={() => handleDelete(idx)}
                 className="text-red-500 hover:text-red-700 text-xl active:scale-90 transition-transform"
               >
-                🗑️
+                🗑
               </button>
             </div>
           ))}
 
           {todos.length === 0 && (
-            <p className="text-center text-gray-500 italic">
-              No tasks yet... Add one above! 🚀
+            <p className="text-center text-gray-500 italic py-6">
+              🚀 No tasks yet. Start by adding one above and crush it today!
             </p>
           )}
         </div>
